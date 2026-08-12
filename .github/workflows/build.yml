@@ -21,9 +21,12 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      - name: Generate sound effects
+        run: python generate_sounds.py
+
       - name: Build EXE
         run: |
-          pyinstaller --onefile --windowed --collect-all ursina --collect-all panda3d --name Corsa3D main.py
+          pyinstaller --onefile --windowed --collect-all ursina --collect-all panda3d --add-data "sounds;sounds" --name Corsa3D main.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
